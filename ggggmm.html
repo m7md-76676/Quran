@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إذاعة القرآن الكريم</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      border: 5px solid gold; /* إطار ذهبي */
+    }
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      font-size: 24px;
+      font-family: 'Ruqaa', sans-serif;
+    }
+    .section {
+      background: rgba(0, 0, 0, 0.6);
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .azkar {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .time {
+      font-size: 20px;
+      margin: 10px;
+    }
+    audio {
+      width: 90%;
+      margin-top: 10px;
+    }
+    table {
+      margin: 0 auto;
+      width: 80%;
+      border-collapse: collapse;
+      color: #fff;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    إذاعة القرآن الكريم
+  </header>
+
+  <div class="section">
+    <h2>بث صوتي للقرآن الكريم - القارئ محمد أيوب</h2>
+    <audio controls autoplay loop>
+      <source src="https://www.dl.dropboxusercontent.com/scl/fi/j22bftxb8csscucgpejqh/3-1-The-Complete-Holy-Quran-Mohamed-Ayoub-128Kbps-44KHz-mp3.mp3?rlkey=2radb73in2h5o5jlh13ksm01c" type="audio/mpeg">
+      متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+  </div>
+
+  <div class="section" id="times">
+    <h3>الوقت الآن:</h3>
+    <div class="time" id="currentTime"></div>
+    <div class="time" id="hijriDate"></div>
+  </div>
+
+  <div class="section">
+    <h3>مواقيت الصلاة</h3>
+    <table>
+      <thead>
+        <tr><th>المدينة</th><th>الفجر</th><th>الظهر</th><th>العصر</th><th>المغرب</th><th>العشاء</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>مكة المكرمة</td><td>04:25 ص</td><td>12:12 م</td><td>03:29 م</td><td>06:42 م</td><td>08:12 م</td></tr>
+        <tr><td>أبها</td><td>04:17 ص</td><td>12:03 م</td><td>03:18 م</td><td>06:31 م</td><td>08:01 م</td></tr>
+        <tr><td>خميس مشيط</td><td>04:18 ص</td><td>12:04 م</td><td>03:19 م</td><td>06:32 م</td><td>08:02 م</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h3>أذكار الصباح والمساء:</h3>
+    <div class="azkar" id="azkarBox">سبحان الله وبحمده، سبحان الله العظيم</div>
+  </div>
+
+  <div class="section">
+    <h3>أحاديث نبوية:</h3>
+    <p>قال رسول الله ﷺ: "اقرءوا سورة البقرة، فإن أخذها بركة، وتركها حسرة، ولا تستطيعها البطلة".</p>
+    <p>قال صلى الله عليه وسلم: "اكلفوا من العمل ما تطيقون فإن الله لا يمل حتى تملوا، وإن أحب العمل إلى الله أدومه وإن قل".</p>
+    <p>عن أبي سعيد الخدري رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: "إذا أيقظ الرجل أهله من الليل فصليا أو صلى ركعتين جميعاً كتبا في الذاكرين الله كثيراً والذاكرات".</p>
+  </div>
+
+  <script>
+    // تحديث الوقت والتاريخ
+    function updateTime() {
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      let ampm = hours >= 12 ? 'م' : 'ص';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      const timeStr = hours + ':' + minutes + ' ' + ampm;
+      document.getElementById('currentTime').textContent = timeStr;
+
+      const hijriFormatter = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+      document.getElementById('hijriDate').textContent = hijriFormatter.format(now);
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // أذكار الصباح والمساء
+    const azkarMorning = [
+      "اللهم إني أصبحت أشهدك وأشهد حملة عرشك وملائكتك وجميع خلقك أنك أنت الله لا إله إلا أنت",
+      "أصبحنا على فطرة الإسلام وكلمة الإخلاص ودين نبينا محمد صلى الله عليه وسلم"
+    ];
+    const azkarEvening = [
+      "اللهم إني أمسيت أشهدك وأشهد حملة عرشك وملائكتك وجميع خلقك أنك أنت الله لا إله إلا أنت",
+      "أمسينا على فطرة الإسلام وكلمة الإخلاص ودين نبينا محمد صلى الله عليه وسلم"
+    ];
+    
+    const azkarList = new Date().getHours() < 12 ? azkarMorning : azkarEvening;
+    let azkarIndex = 0;
+    setInterval(() => {
+      azkarIndex = (azkarIndex + 1) % azkarList.length;
+      document.getElementById("azkarBox").textContent = azkarList[azkarIndex];
+    }, 7000);
+  </script>
+</body>
+</html>
